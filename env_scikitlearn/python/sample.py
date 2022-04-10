@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
-from skleran.metrics import classification_report
+from sklearn.metrics import classification_report
 
 import os.path
 import logging
@@ -18,7 +18,7 @@ if os.path.isdir("out") == False:
 logging.config.fileConfig("logging.conf")
 logger = getLogger(__name__)
 
-from skleran.datasets import load_iris
+from sklearn.datasets import load_iris
 iris = load_iris()
 
 logger.info(f'shape of data: {iris["data"].shape}')
@@ -29,9 +29,9 @@ dataset['species'] = iris['target']
 logger.info('\n' + dataset.head().to_string())
 
 Y = np.array(dataset['species'])
-X = np.array(dataset[['sepal_length', 'sepale_width', 'petal_length', 'petal_width']])
+X = np.array(dataset[['sepal_length', 'sepal_width', 'petal_length', 'petal_width']])
 
-X_train, X_valid, Y_train, Y_valid = train_test_split(X, Y, test_siize=0.3, random_state=0)
+X_train, X_valid, Y_train, Y_valid = train_test_split(X, Y, test_size=0.3, random_state=0)
 
 svm_model = SVC()
 svm_model.fit(X_train, Y_train)
